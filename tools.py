@@ -5,7 +5,7 @@ import nmap
 
 
 def _get_workdir_root():
-    workdir_root = os.environ.get('WORKDIR_ROOT', "./data/tasks/")
+    workdir_root = os.environ.get('WORKDIR_ROOT', "data/tasks/")
     return workdir_root
 
 
