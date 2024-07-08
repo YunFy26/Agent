@@ -73,7 +73,8 @@ class Prompt:
     response:
             {
                 "action": {
-                    "action_subtask_id": "本次执行的任务的id",
+                    "action_subtask_id": "本次执行的子任务的id",
+                    "subtask_description": "本次执行的子任务的描述",
                     "reasoning": "你的思考过程",
                     "tool_name": "执行本次任务调用的工具名",
                     "tool_args": 
