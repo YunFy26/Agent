@@ -31,7 +31,8 @@ class QwenSplitTask:
                 model=self.model_name,
                 api_key=self.api_key,
                 messages=messages)
-            content = json.loads(response["output"]["text"])
+            # content = json.loads(response["output"]["text"])
+            content = json.loads(response["output"]["text"].strip('```json').strip('```').strip())
             return content
         except Exception as e:
             logger.info("call llm exception:{}".format(e))
@@ -44,11 +45,12 @@ class QwenAction:
         self.model_name = os.environ.get('MODEL_NAME_1')
         self.client = dashscope.Generation()
 
-    def chat(self, prompt):
+    def chat(self, prompt, chat_history):
         try:
             # 构造messages
             # TODO:增加对long memory的处理
             messages = [Message(role="system", content=prompt)]
+            messages.append(Message(role="user", content=chat_history))
             messages.append(Message(role="user", content=user_action_task_prompt))
 
             # 请求llm
@@ -62,3 +64,5 @@ class QwenAction:
         except Exception as e:
             logger.info("call llm exception:{}".format(e))
         return {}
+
+
