@@ -6,6 +6,15 @@ import json
 from prompt import user_split_task_prompt, user_action_task_prompt
 
 
+# TODO: 大模型父类模版，子类可以自定义模型
+# class BaseLLM:
+#     def __init__(self):
+#         self.api_key = os.environ.get('DASHSCOPE_API_KEY')
+#         self.model_name = os.environ.get('MODEL_NAME')
+#         self.client = dashscope.Generation()
+
+
+# TODO: 任务分解模型和ReAct模型是否分开？
 class QwenSplitTask:
     def __init__(self):
         self.api_key = os.environ.get('DASHSCOPE_API_KEY')
@@ -38,6 +47,7 @@ class QwenAction:
     def chat(self, prompt):
         try:
             # 构造messages
+            # TODO:增加对long memory的处理
             messages = [Message(role="system", content=prompt)]
             messages.append(Message(role="user", content=user_action_task_prompt))
 
